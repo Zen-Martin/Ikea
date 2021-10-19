@@ -129,19 +129,6 @@ public class Page {
         element.click();
     }
 
-    public boolean verifyLink(WebElement element) {
-        int verify = 0;
-        try {
-            URL link = new URL(element.getAttribute("href"));
-            HttpURLConnection httpConn = (HttpURLConnection) link.openConnection();
-            httpConn.connect();
-            verify = httpConn.getResponseCode();
-        } catch (Exception e) {
-        }
-        return (verify==200);
-    }
-
-
     protected void scroll(int height){
         js.executeScript("window.scrollBy(0,"+height+")");
     }

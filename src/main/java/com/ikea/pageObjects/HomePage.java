@@ -1,6 +1,5 @@
 package com.ikea.pageObjects;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -13,8 +12,12 @@ public class HomePage extends Page {
     @FindBy(id = "onetrust-close-btn-container")
     private WebElement cookieOption;
 
-    @FindBy( css = "div.hnf-header__container.hnf-page-container__main > ul li a")
+    @FindBy(css = "div.hnf-header__container.hnf-page-container__main > ul li a")
     private List<WebElement> NavBarOption;
+
+    @FindBy(linkText = "Se connecter")
+    private WebElement login;
+
 
     public HomePage() {
     }
@@ -43,6 +46,13 @@ public class HomePage extends Page {
 
     public void clickOnPurchase(){
         clickOnNavBarItem("Suivi de commande");
+    }
+
+    public void clickOnAccount(){
+        clickOnNavBarItem("Mon profil");
+        shortUntil(visibilityOf(login));
+        clickOn(login);
+        waitForLoadingPage();
     }
 
 

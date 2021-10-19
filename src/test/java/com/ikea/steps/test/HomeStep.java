@@ -20,6 +20,10 @@ public class HomeStep implements En {
             homePage.clickOnPurchase();
         });
 
+        And("I get on login session", () -> {
+            homePage.clickOnAccount();
+        });
+
     }
 
 }
