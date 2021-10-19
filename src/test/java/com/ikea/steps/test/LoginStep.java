@@ -39,6 +39,22 @@ public class LoginStep implements En {
             Assert.assertEquals(loginPage.verifyTabsLangages(),true);
         });
 
+        When("Once connected, the panel is displayed click on *mon profil*", () -> {
+            loginPage.clickOnProfile();
+        });
+
+        When("Click on *modifier* located at the level of *compte* option *personnal*", () -> {
+            loginPage.clickOnModifyProfile();
+        });
+
+        When("Fill the field *nom supplémentaire* with special caracter", () -> {
+            loginPage.setMiddleName();
+        });
+
+        Then("The name is accepted despite the fact that it contains an impermissible character", () -> {
+            Assert.assertEquals(loginPage.verifyProfileFakeUpdates(),true);
+        });
+
     }
 
 }

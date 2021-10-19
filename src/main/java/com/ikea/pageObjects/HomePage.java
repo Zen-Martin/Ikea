@@ -15,16 +15,14 @@ public class HomePage extends Page {
     @FindBy(css = "div.hnf-header__container.hnf-page-container__main > ul li a")
     private List<WebElement> NavBarOption;
 
-    @FindBy(linkText = "Se connecter")
-    private WebElement login;
-
-
     public HomePage() {
     }
 
     public void handleCookie(){
-        shortUntil(visibilityOf(cookieOption));
-        clickOn(cookieOption);
+        try{
+            shortUntil(visibilityOf(cookieOption));
+            clickOn(cookieOption);
+        }catch (Exception e){}
     }
 
     public void goToHomePage(){
@@ -50,13 +48,7 @@ public class HomePage extends Page {
 
     public void clickOnAccount(){
         clickOnNavBarItem("Mon profil");
-        shortUntil(visibilityOf(login));
-        clickOn(login);
-        waitForLoadingPage();
     }
-
-
-
 
 
 }

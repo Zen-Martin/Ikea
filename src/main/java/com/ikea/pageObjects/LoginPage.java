@@ -35,11 +35,34 @@ public class LoginPage extends Page{
     @FindBy(className = "ProfilePage_paragraph__3QfT9")
     private WebElement profilTab;
 
+    @FindBy(css = ".AccountTab_column__1iRoY > button")
+    private WebElement updateProfileWish;
+
     @FindBy(css = ".TransactionsList_transactionsList__1BbIi:nth-child(2) > h4:nth-child(2)")
     private WebElement transactionTab;
 
     @FindBy(className = "MembersPage_introInvite__1VRVX")
     private WebElement memberTab;
+
+    @FindBy(id = "middleName")
+    private WebElement optionName;
+
+    @FindBy(css = ".sheets__content-wrapper > div > div > form > button")
+    private WebElement updateProfileValidation;
+
+    @FindBy(className = "toast__text")
+    private WebElement updateStatut;
+
+    @FindBy(css = ".loyalty-modal-content__link-page__header-top > a")
+    private WebElement disconnectField;
+
+    @FindBy(linkText = "Se connecter")
+    private WebElement login;
+
+    @FindBy(css = ".loyalty-modal-content__link-page__header-bottom > a > div > div:nth-child(1)")
+    private WebElement isLogged;
+
+    private static int logged = 0;
 
     private final String URI = config.getEnvironment()+
             "p/ragrund-porte-serviettes-avec-2-barres-bambou-50417614/";
@@ -47,6 +70,8 @@ public class LoginPage extends Page{
     private String notice = "";
 
     private int correctIteration = 0;
+
+    private String specialCharactere = "l@l@";
 
     public LoginPage(){}
 
@@ -60,7 +85,20 @@ public class LoginPage extends Page{
         shortUntil(visibilityOf(notification));
     }
 
-    public void getLogged(){
+    public void getLogged() {
+        if (logged==0) {
+            shortUntil(visibilityOf(login));
+            clickOn(login);
+            waitForLoadingPage();
+            connexion();
+            logged++;
+        } else {
+            clickOn(isLogged);
+            waitForLoadingPage();
+        }
+    }
+
+    public void connexion(){
         setField(emailField, config.getEmail());
         setField(passwordField, config.getPwd());
         passwordField.sendKeys(Keys.ENTER);
@@ -94,11 +132,15 @@ public class LoginPage extends Page{
     }
 
     public void getOnProfile(){
-        shortUntil(visibilityOf(navBar));
-        clickOnNavBarItem("Mon profil");
+        clickOnProfile();
         shortUntil(visibilityOf(profilTab));
         notice = profilTab.getText();
         getLangage();
+    }
+
+    public void clickOnProfile(){
+        shortUntil(visibilityOf(navBar));
+        clickOnNavBarItem("Mon profil");
     }
 
     public void getOnTransaction(){
@@ -122,6 +164,25 @@ public class LoginPage extends Page{
         getLangage();
     }
 
+    public void clickOnModifyProfile(){
+        shortUntil(visibilityOf(updateProfileWish));
+        clickOn(updateProfileWish);
+    }
+
+    public void setMiddleName(){
+        shortUntil(visibilityOf(optionName));
+        resetField();
+        optionName.sendKeys(specialCharactere);
+        clickOn(updateProfileValidation);
+        shortUntil(visibilityOf(updateStatut));
+        notice = updateStatut.getText();
+    }
+
+    public void resetField(){
+        optionName.sendKeys(Keys.CONTROL + "a");
+        optionName.sendKeys(Keys.DELETE);
+    }
+
     public boolean verifyFavorisNotification(){
         return (correctIteration==1);
     }
@@ -129,5 +190,11 @@ public class LoginPage extends Page{
     public boolean verifyTabsLangages(){
         return (correctIteration==3);
     }
+
+    public boolean verifyProfileFakeUpdates(){
+        return !notice.contains("a été mise à jour");
+    }
+
+
 
 }
