@@ -5,35 +5,6 @@ Feature: Re-Test Cases for Ikea Website without account Access
     And I get on login session
     And I connect to my account
 
-#  @severity=minor
-#  @recommandation_1505
-#  Scenario: Add a checkbox below the main address
-#    When Once connected, click on *gérer votre compte*
-#    And Click on *adresse*
-#    Then The main address is displayed
-#    But There is no possibility to make the main address the default delivery address
-#
-#  @severity=minor
-#  @bug_1508
-#  Scenario: Button not-functional
-#    When Once connected, click on *gérer votre compte*
-#    And Click on *adresse*
-#    And At the level of *adresse de livraison*, click on *modifier*
-#    And In the case of an address deletion already existing, click on *supprimer*
-#    And A pop-in window will appear stating that the address has been deleted
-#    And Click on the button *rejeter* to cancel the current action
-#    Then Clicking on the button *rejeter* does not change anything
-#
-#  @severity=minor
-#  @bug_1509
-#  Scenario: Grammar error
-#    When Once connected, click on *gérer votre compte*
-#    And Click on *adresse*
-#    And In the level of *adresse principale*, click on *modifier*
-#    And Fill the form leaving the address field empty
-#    Then An error is displayed below the address field
-#    But the error text contains a grammatical error
-
   @severity=minor
   @bug_1537
   Scenario: Language error : English ways on French website
