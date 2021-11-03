@@ -27,7 +27,6 @@ public class HomePage extends Page {
 
     public void goToHomePage(){
         get(config.getEnvironment());
-        waitForLoadingPage();
         handleCookie();
     }
 

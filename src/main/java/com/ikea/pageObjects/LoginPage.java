@@ -151,7 +151,7 @@ public class LoginPage extends Page{
     }
 
     public void getOnMembres(){
-        clickOnNavBarItem("Membres");
+        clickOnNavBarItem("Collègues");
         shortUntil(visibilityOf(memberTab));
         notice = memberTab.getText();
         getLangage();
