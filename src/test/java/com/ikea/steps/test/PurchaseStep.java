@@ -24,8 +24,5 @@ public class PurchaseStep implements En {
             Assert.assertEquals(purchasePage.verifyEmailField(),true);
         });
 
-
-
-
     }
 }

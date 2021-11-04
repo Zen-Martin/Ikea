@@ -25,7 +25,7 @@ public class PurchasePage extends Page{
 
     public PurchasePage(){}
 
-    public void setField(WebElement element){
+    private void setField(WebElement element){
         clickOn(element);
         element.findElement(By.tagName("input"))
                 .sendKeys(config.getEmail().substring(0,2));
